@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: algebra
+  title: Algebra
+  description: 'Algebra v1.3
+
+    "Why do we need to study algebra? We''ll never use it in real life..." Anybody
+    else remember saying that?
+
+
+    Module ID: algebra
+
+
+    Created by: Royal_Flu$h
+
+    Inspired by: Red031000
+
+    TwitchPlays implemented by: Riverbui
+
+    Manual overhaul by: Timwi
+
+
+    Manual available here: https://ktane.timwi.de/HTML/Algebra.html'
+  version: 1.3
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: 0bfe5d35176594d42b8df09b85ba0c40, type: 3}
