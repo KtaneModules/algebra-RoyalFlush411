@@ -67,99 +67,62 @@ public class algebraScript : MonoBehaviour
 		decimal valueC;
 
 	//TwitchPlays Code
-	private string TwitchHelpMessage = "Example: Type '!{0} -1.5 submit'";
-	protected KMSelectable[] ProcessTwitchCommand(string TPInput)
+	private string TwitchHelpMessage = "Example: Type '!{0} submit <value>' OR '<value> submit'. Type 'clear' to clear the screen.";
+	protected KMSelectable[] ProcessTwitchCommand(string input)
 {
-    string[] split = TPInput.ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-    string command = split[0];
-    bool Incomp = false;
-    List<KMSelectable> Select = new List<KMSelectable>();
-    foreach (char c in command)
-    {
-        if (c == '0')
-        {
-            Select.Add(but0);
-        }
-        else if (c == '1')
-        {
-            Select.Add(but1);
-        }
-				else if (c == '2')
-				{
-            Select.Add(but2);
-        }
-				else if (c == '3')
-        {
-            Select.Add(but3);
-        }
-				else if (c == '4')
-				{
-            Select.Add(but4);
-        }
-				else if (c == '5')
-        {
-            Select.Add(but5);
-        }
-				else if (c == '6')
-				{
-            Select.Add(but6);
-        }
-				else if (c == '7')
-        {
-            Select.Add(but7);
-        }
-				else if (c == '8')
-				{
-            Select.Add(but8);
-        }
-				else if (c == '9')
-				{
-            Select.Add(but9);
-        }
-				else if (c == '-')
-				{
-            Select.Add(negativeBut);
-        }
-				else if (c == '.')
-				{
-            Select.Add(decimalBut);
-        }
-				else if (c == 'c')
-				{
-            Select.Add(clearBut);
-        }
-				else if (c == 's')
-				{
-            Select.Add(submitBut);
-        }
-				else
-        {
-            Select.Clear();
-            Incomp = true;
-        }
-		}
-    if (split[0] == "clear" || split[1] == "c")
-        {
-             Select.Add(clearBut);
-             Incomp = false;
-				}
-    else if (split[0] == "submit" || split[1] == "submit" ||  split[1] == "s")
-        {
-             Select.Add(submitBut);
-             Incomp = false;
-        }
-
-    if (!Incomp)
-    {
-        KMSelectable[] SelectArray = Select.ToArray();
-        return SelectArray;
-    }
-    else
-    {
-        return null;
-    }
-}
+			Dictionary<char, KMSelectable> buttons = new Dictionary<char, KMSelectable>()
+			{
+					{ '0', but0 },
+					{ '1', but1 },
+					{ '2', but2 },
+					{ '3', but3 },
+					{ '4', but4 },
+					{ '5', but5 },
+					{ '6', but6 },
+					{ '7', but7 },
+					{ '8', but8 },
+					{ '9', but9 },
+					{ '-', negativeBut },
+					{ '.', decimalBut }
+			};
+			string lowerinput = input.ToLowerInvariant();
+			string [] split = lowerinput.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+			List<KMSelectable> Select = new List<KMSelectable>();
+			string command = split[0];
+			if (lowerinput == "submit")
+			{
+					return new KMSelectable[1] { submitBut };
+			}
+			else if (lowerinput == "clear")
+			{
+					return new KMSelectable[1] { clearBut };
+			}
+			else if (split.Length == 2 && split[0] == "submit")
+			{
+					command = split[1];
+			}
+			else if (split.Length > 2)
+			{
+					return null;
+			}
+			foreach (char c in command)
+			{
+					if (buttons.ContainsKey(c))
+					{
+							Select.Add(buttons[c]);
+					}
+					else
+					{
+							return null;
+					}
+			}
+			if (split.Contains("submit"))
+			{
+					Select.Add(submitBut);
+			}
+			KMSelectable[] SelectArray = Select.ToArray();
+			return SelectArray;
+	}
 
 
 		void Awake ()
@@ -545,7 +508,7 @@ public class algebraScript : MonoBehaviour
 							{
 									GetComponent<KMBombModule>().HandleStrike();
 									inputText.text = "";
-									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 1 response was {1}. I was expecting {2}.", moduleId, textValue1.ToString("G0"), valueA);
+									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 1 response was {1}. I was expecting {2}.", moduleId, textValue1.ToString("G0"), valueA.ToString("G0"));
 							}
 							break;
 
@@ -564,7 +527,7 @@ public class algebraScript : MonoBehaviour
 							{
 									GetComponent<KMBombModule>().HandleStrike();
 									inputText.text = "";
-									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 2 response was {1}. I was expecting {2}.", moduleId, textValue2.ToString("G0"), valueB);
+									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 2 response was {1}. I was expecting {2}.", moduleId, textValue2.ToString("G0"), valueB.ToString("G0"));
 							}
 							break;
 
@@ -584,7 +547,7 @@ public class algebraScript : MonoBehaviour
 							{
 									GetComponent<KMBombModule>().HandleStrike();
 									inputText.text = "";
-									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 3 response was {1}. I was expecting {2}.", moduleId, textValue3.ToString("G0"), valueC);
+									Debug.LogFormat("[Algebra #{0}] Strike! Your equation 3 response was {1}. I was expecting {2}.", moduleId, textValue3.ToString("G0"), valueC.ToString("G0"));
 							}
 							break;
 
