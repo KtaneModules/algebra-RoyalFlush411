@@ -120,10 +120,6 @@ public class algebraScript : MonoBehaviour
         int level3Pick = UnityEngine.Random.Range(0, 8);
         level3Equation = level3Options[level3Pick];
 
-        Debug.LogFormat("[Algebra #{0}] Equation 1 is {1}.", moduleId, level1Equation.name);
-        Debug.LogFormat("[Algebra #{0}] Equation 2 is {1}.", moduleId, level2Equation.name);
-        Debug.LogFormat("[Algebra #{0}] Equation 3 is {1}.", moduleId, level3Equation.name);
-
         //Set the displays
         formulaScreen.GetComponent<Renderer>().material.mainTexture = level1Equation;
         inputText.text = "";
@@ -321,16 +317,20 @@ public class algebraScript : MonoBehaviour
         {
             valueC = 9 * (valueY / 2) + (valueX * valueY) / 4;
         }
+        else if ((level3Pick == 6 && valueY == 0) || level3Pick == 7)
+        {
+            level3Equation = level3Options[7];
+            valueC = ((valueZ / 2) - (valueX / 4) + valueZ) / 4;
+        }
         else if (level3Pick == 6)
         {
             valueC = (valueX * (valueY / 2) + 11) * (valueY * 2) - 4;
         }
-        else if (level3Pick == 7)
-        {
-            valueC = ((valueZ / 2) - (valueX / 4) + valueZ) / 4;
-        }
 
-        //Debug for formulae solutions (values of a, b & c)
+        //Debug for formulae & solutions (values of a, b & c)
+        Debug.LogFormat("[Algebra #{0}] Equation 1 is {1}.", moduleId, level1Equation.name);
+        Debug.LogFormat("[Algebra #{0}] Equation 2 is {1}.", moduleId, level2Equation.name);
+        Debug.LogFormat("[Algebra #{0}] Equation 3 is {1}.", moduleId, level3Equation.name);
         Debug.LogFormat("[Algebra #{0}] The value of A is {1}.", moduleId, valueA.ToString("G0"));
         Debug.LogFormat("[Algebra #{0}] The value of B is {1}.", moduleId, valueB.ToString("G0"));
         Debug.LogFormat("[Algebra #{0}] The value of C is {1}.", moduleId, valueC.ToString("G0"));

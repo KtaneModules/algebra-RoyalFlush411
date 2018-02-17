@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: algebra
   title: Algebra
-  description: 'Algebra v1.31
+  description: 'Algebra v1.33
 
     "Why do we need to study algebra? We''ll never use it in real life..." Anybody
     else remember saying that?
@@ -26,12 +26,12 @@ MonoBehaviour:
 
     Inspired by: Red031000
 
-    TwitchPlays implemented by: Riverbui
+    TwitchPlays implemented by: Riverbui & Timwi
 
     Manual overhaul by: Timwi
 
 
     Manual available here: https://ktane.timwi.de/HTML/Algebra.html'
-  version: 1.31
+  version: 1.33
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 0bfe5d35176594d42b8df09b85ba0c40, type: 3}
