@@ -339,7 +339,7 @@ public class algebraScript : MonoBehaviour
     public void OnButtonPress(string textToAppend)
     {
         Audio.PlaySoundAtTransform("keyStroke", transform);
-        if (inputText.text.Length < 7)
+        if (inputText.text.Length < 11)
             inputText.text += textToAppend;
     }
 
